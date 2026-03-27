@@ -19,6 +19,11 @@ import { cn } from "../utils/utils";
 export default function DashboardPage() {
   const data = MOCK_ANALYSIS_RESULT;
 
+  const shareProfile = () => {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copied!");
+  };
+
   const pieData = {
     labels: ["Matched Skills", "Missing Skills"],
     datasets: [
@@ -74,12 +79,11 @@ export default function DashboardPage() {
               Great progress! You're closer to being job-ready than you think. Focus on the missing skills to reach 100%.
             </p>
             <div className="flex items-center space-x-4 pt-4">
-              <button className="px-6 py-3 bg-neon-teal text-midnight font-bold rounded-xl hover:bg-neon-teal/90 transition-all flex items-center space-x-2">
-                <span>Download Report</span>
-                <ArrowUpRight className="w-5 h-5" />
-              </button>
-              <button className="px-6 py-3 bg-white/5 text-white font-bold rounded-xl border border-white/10 hover:bg-white/10 transition-all">
-                Share Profile
+              <button 
+              onClick={shareProfile}
+                className="px-6 py-3 bg-white/5 text-white font-bold rounded-xl border border-white/10 hover:bg-white/10 transition-all"
+              >
+              Share Profile
               </button>
             </div>
           </div>
@@ -196,10 +200,7 @@ export default function DashboardPage() {
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold text-white">Personalized Learning Path</h2>
-          <div className="flex items-center space-x-2 text-neon-teal text-sm font-bold cursor-pointer hover:underline">
-            <span>View All Resources</span>
-            <ChevronRight className="w-4 h-4" />
-          </div>
+          
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {data.learningPath.map((item, i) => (
@@ -244,8 +245,7 @@ export default function DashboardPage() {
             <History className="w-6 h-6 text-neon-amber" />
             <span>Analysis History</span>
           </h2>
-          <button className="text-sm text-slate-500 hover:text-white transition-colors">View All</button>
-        </div>
+          </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>

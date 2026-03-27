@@ -8,6 +8,7 @@ import ResumeUploadPage from "./pages/ResumeUploadPage";
 import SkillInputPage from "./pages/SkillInputPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/ProfilePage";
+import AccountSettings from "./pages/AccountSettings";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -66,6 +67,9 @@ export default function App() {
             <Route
               path="/profile"
               element={isLoggedIn ? <ProfilePage /> : <Navigate to="/auth" />}
+            />
+
+            <Route path="/account-settings" element={<AccountSettings />} 
             />
 
             {/* 🔁 Fallback */}
