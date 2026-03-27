@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
@@ -11,19 +12,65 @@ import ProfilePage from "./pages/ProfilePage";
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // ✅ Persist login on refresh
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-midnight text-slate-200">
-        <Navbar />
+
+        {/* ✅ Navbar with conditional UI */}
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+
         <main className="pt-16">
           <Routes>
+
+            {/* 🟢 Public Routes */}
             <Route path="/" element={<LandingPage />} />
-            <Route path="/auth" element={<AuthPage onLogin={() => setIsLoggedIn(true)} />} />
-            <Route path="/upload" element={<ResumeUploadPage />} />
-            <Route path="/skills" element={<SkillInputPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route
+              path="/auth"
+              element={
+                isLoggedIn ? (
+                  <Navigate to="/dashboard" />
+                ) : (
+                  <AuthPage
+                    onLogin={() => {
+                      setIsLoggedIn(true);
+                      localStorage.setItem("isLoggedIn", "true");
+                    }}
+                  />
+                )
+              }
+            />
+
+            {/* 🔒 Protected Routes */}
+            <Route
+              path="/upload"
+              element={isLoggedIn ? <ResumeUploadPage /> : <Navigate to="/auth" />}
+            />
+
+            <Route
+              path="/skills"
+              element={isLoggedIn ? <SkillInputPage /> : <Navigate to="/auth" />}
+            />
+
+            <Route
+              path="/dashboard"
+              element={isLoggedIn ? <DashboardPage /> : <Navigate to="/auth" />}
+            />
+
+            <Route
+              path="/profile"
+              element={isLoggedIn ? <ProfilePage /> : <Navigate to="/auth" />}
+            />
+
+            {/* 🔁 Fallback */}
             <Route path="*" element={<Navigate to="/" />} />
+
           </Routes>
         </main>
       </div>
