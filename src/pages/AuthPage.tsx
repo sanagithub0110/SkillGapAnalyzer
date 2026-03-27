@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
-import { Mail, Lock, User, ArrowRight, Github, Chrome } from "lucide-react";
+import { Mail, Lock, User, ArrowRight} from "lucide-react";
 import { cn } from "../utils/utils";
 
 export default function AuthPage({ onLogin }: { onLogin: () => void }) {
@@ -115,25 +115,7 @@ export default function AuthPage({ onLogin }: { onLogin: () => void }) {
         </form>
 
         <div className="mt-8 relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-white/10"></div>
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-midnight px-2 text-slate-500">Or continue with</span>
-          </div>
-        </div>
-
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center space-x-2 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-            <Chrome className="w-5 h-5" />
-            <span className="text-sm font-medium">Google</span>
-          </button>
-          <button className="flex items-center justify-center space-x-2 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-            <Github className="w-5 h-5" />
-            <span className="text-sm font-medium">GitHub</span>
-          </button>
-        </div>
-
+          
         <p className="mt-10 text-center text-sm text-slate-500">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button
