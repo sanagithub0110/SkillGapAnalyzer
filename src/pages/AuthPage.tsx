@@ -113,8 +113,6 @@ export default function AuthPage({ onLogin }: { onLogin: () => void }) {
             )}
           </button>
         </form>
-
-        <div className="mt-8 relative">
           
         <p className="mt-10 text-center text-sm text-slate-500">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
