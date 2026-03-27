@@ -146,7 +146,7 @@ export default function LandingPage() {
           </span>
         </div>
         <p className="text-slate-500 text-sm">
-          © 2024 SkillMap AI. Built for the future of work.
+          © 2026 SkillMap. Built for the future of work.
         </p>
       </footer>
     </div>
